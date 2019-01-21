@@ -16,10 +16,10 @@ class ForTime extends React.Component {
     
     render(){
         return(
-            <div>
+            <div className="content">
                 <h1>ForTime</h1>
                 <form className="wod-inputs">
-                    <label for="name">Time</label>
+                    <label htmlFor="name">Time</label>
                     <input name="time" type="text" placeholder="0" />
                     <label for="rounds">Rounds</label>
                     <input name="rounds" type="text" placeholder="0" />

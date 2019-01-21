@@ -6,9 +6,9 @@ const Header = props => (
         <nav className="site-nav">
             <ul>
                 <li>Sign In</li>
-                <li>AMRAP</li>
-                <li>For Time</li>
-                <li>About</li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/amrap">AMRAP</a></li>
+                <li><a href="/fortime">For Time</a></li>
             </ul>
         </nav>
     </header>

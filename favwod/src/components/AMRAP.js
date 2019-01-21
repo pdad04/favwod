@@ -16,10 +16,10 @@ class AMRAP extends React.Component {
     
     render(){
         return(
-            <div>
+            <div className="content">
                 <h1>AMRAP</h1>
                 <form className="wod-inputs">
-                    <label for="name">Time</label>
+                    <label htmlFor="name">Time</label>
                     <input name="time" type="text" placeholder="0" />
                     <MovementInputs 
                         movements={this.state.movements}
