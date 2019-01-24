@@ -12,13 +12,15 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <Router>
-          <Switch>
-            <Route exact path="/" component={SavedWod} />
-            <Route path="/AMRAP" component={AMRAP} />
-            <Route path="/FORTIME" component={ForTime} />
-          </Switch>
-        </Router>
+        <div className="container">
+          <Router>
+            <Switch>
+              <Route exact path="/" component={Main} />
+              <Route path="/AMRAP" component={AMRAP} />
+              <Route path="/FORTIME" component={ForTime} />
+            </Switch>
+          </Router>
+          </div>
       </div>
     );
   }

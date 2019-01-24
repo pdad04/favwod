@@ -16,7 +16,7 @@ class AMRAP extends React.Component {
     
     render(){
         return(
-            <div className="content">
+            <div className="content full-width">
                 <h1>AMRAP</h1>
                 <form className="wod-inputs">
                     <label htmlFor="name">Time</label>
