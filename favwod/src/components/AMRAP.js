@@ -2,29 +2,23 @@ import React from 'react';
 import MovementInputs from './MovementInputs';
 
 class AMRAP extends React.Component {
-    state = {
-        time: "",
-        movements: [{name: ""}],
-    };
-
-    addMovement = (e) => {
-        e.preventDefault();
-        this.setState( (prevState) => ({
-            movements: [...prevState.movements, {name:""}]
-        }))
+    componentDidMount(){
+        console.log('MOUNTED!!!!!');
+        this.props.getType(this.props.match.params.type);
     }
-    
     render(){
         return(
             <div className="content full-width">
                 <h1>AMRAP</h1>
-                <form className="wod-inputs">
+                <form className="wod-inputs" onSubmit={this.props.handleSubmit}>
                     <label htmlFor="name">Time</label>
-                    <input name="time" type="text" placeholder="0" />
+                    <input name="time" type="number" min="0" max="120" placeholder="0" onChange={this.props.handleMovementInput} />
                     <MovementInputs 
-                        movements={this.state.movements}
+                        movements={this.props.movements}
+                        onInput={this.props.handleMovementInput}
                     />
-                    <button onClick={this.addMovement}>Add Movement</button>
+                    <button onClick={this.props.addMovement}>Add Movement</button>
+                    <button type="submit" onClick={this.props.handleSubmit}>Submit</button>
                 </form>
             </div>
         )

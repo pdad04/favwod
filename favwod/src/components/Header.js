@@ -7,8 +7,8 @@ const Header = props => (
             <ul>
                 <li>Sign In</li>
                 <li><a href="/">Home</a></li>
-                <li><a href="/amrap">AMRAP</a></li>
-                <li><a href="/fortime">For Time</a></li>
+                <li><a href="/addwod/amrap">AMRAP</a></li>
+                <li><a href="/addwod/fortime">For Time</a></li>
             </ul>
         </nav>
     </header>
