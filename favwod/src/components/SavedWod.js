@@ -2,7 +2,7 @@ import React from 'react';
 
 const SavedWod = () => (
     <React.Fragment>
-        <div class="content">
+        <div className="content">
             <div className="wods">
                 <h2>For Time</h2>
                 <ul>
@@ -12,7 +12,7 @@ const SavedWod = () => (
                 </ul>
             </div>
         </div>
-        <div class="content">
+        <div className="content">
             <div className="wods">
                 <h2>AMRAP</h2>
                 <ul>
@@ -22,7 +22,7 @@ const SavedWod = () => (
                 </ul>
             </div>
         </div>
-        <div class="content">
+        <div className="content">
             <div className="wods">
                 <h2>AMRAP</h2>
                 <ul>
@@ -31,7 +31,7 @@ const SavedWod = () => (
                 </ul>
             </div>
         </div>
-        <div class="content">
+        <div className="content">
             <div className="wods">
                 <h2>AMRAP</h2>
                 <ul>
@@ -40,7 +40,7 @@ const SavedWod = () => (
                 </ul>
             </div>
         </div>
-        <div class="content">
+        <div className="content">
             <div className="wods">
                 <h2>AMRAP</h2>
                 <ul>

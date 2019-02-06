@@ -11,7 +11,7 @@ class ForTime extends React.Component {
         return(
             <div className="content full-width">
                 <h1>ForTime</h1>
-                <form className="wod-inputs">
+                <form className="wod-inputs" onSubmit={this.props.handleSubmit}>
                     <label htmlFor="name">Time</label>
                     <input name="time" type="number" placeholder="0" onChange={this.props.handleMovementInput} />
                     <label htmlFor="rounds">Rounds</label>
@@ -21,7 +21,7 @@ class ForTime extends React.Component {
                         onInput={this.props.handleMovementInput}
                     />
                     <button onClick={this.props.addMovement}>Add Movement</button>
-                    <button onClick={this.props.handleSubmit}>Submit</button>
+                    <button>Submit</button>
                 </form>
             </div>
         )

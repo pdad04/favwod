@@ -12,6 +12,7 @@ class MovementInputs extends React.Component {
                             name={movement}
                             className="movements"
                             onChange={(e) => this.props.onInput(e, idx)}
+                            required
                         />
                     </React.Fragment>
                 )

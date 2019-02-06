@@ -1,24 +1,33 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import './css/styles.css';
 import Header from './components/Header'
 import AMRAP from './components/AMRAP';
 import ForTime from './components/ForTime';
 import Main from './components/Main';
 import SavedWod from './components/SavedWod';
+import SignIn from './components/SignIn';
 import firebase from './base';
+import CreateAccount from './components/CreateAccount';
 
 class App extends Component {
 
-  state = {
-    time: "",
-    rounds: "",
-    type: "",
-    movements: [{name: ""}],
-  };
+  constructor(props){
+    super(props)
+    this.state = {
+      time: "",
+      rounds: "",
+      type: "",
+      movements: [{name: ""}],
+      user: null,
+    };
+
+  }
 
   componentDidMount(){
     this.database = firebase.database();
+    firebase.auth().onAuthStateChanged(user => user ? this.setState({user: user.uid}) : this.setState({user: ""}));
+    
   }
 
   addMovement = (e) => {
@@ -47,7 +56,6 @@ class App extends Component {
   }
 
   getWodType = (type) =>{
-    console.log(type);
     this.setState({type: type})
   }
 
@@ -58,37 +66,86 @@ class App extends Component {
         time: this.state.time,
         type: this.state.type,
     });
-  } 
+  }
+
+  currentUser = () => {
+    firebase.auth().onAuthStateChanged(loggedUser => loggedUser ? this.setState({user: loggedUser.uid}) : this.setState({user: ""}));
+  }
+
+  signOut = () => {
+    firebase.auth().signOut().then(() => console.log('Signed Out')).catch(error => console.log('an error occurred', error));
+  }
 
   render() {
+    const {user} = this.state;
+    if(user === null){
+      return(
+        <div className="App">
+          <Header />
+        </div>
+      )
+    }
     return (
       <div className="App">
-        <Header />
+        <Header 
+          user={this.state.user}
+          signOut={this.signOut}
+        />
         <div className="container">
           <Router>
             <Switch>
-              <Route exact path="/" component={Main} />
+              <Route exact path="/" component={ Main } />
+              <Route 
+                path="/savedwod" 
+                render={(props) => ( user ? <SavedWod /> : <Redirect to="/createaccount" />  )}
+              />
+              <Route
+                path="/createaccount"
+                render={(props) => 
+                  ( user ? 
+                    <Redirect to="/savedwod" /> 
+                    : 
+                    <CreateAccount {...props}
+                      getUser={this.currentUser}
+                    />)}
+              />
+              <Route
+                path="/signin"
+                render={(props) => 
+                  (user ?
+                    <Redirect to="/savedwod" />
+                    :
+                    <SignIn {...props}
+                      getUser={this.currentUser}
+                    />)}
+              />
               <Route 
                 path="/addwod/:type(amrap)" 
-                render={(props) => 
-                <AMRAP {...props}
-                  addMovement={this.addMovement}
-                  movements={this.state.movements}
-                  handleMovementInput={(e,idx) => this.handleMovementInput(e,idx)}
-                  handleSubmit={this.handleSubmit}
-                  getType={(type) => this.getWodType(type)}
-                />}
+                render={(props) =>
+                  (!user ? 
+                  <Redirect to="/signin" /> 
+                  :
+                  <AMRAP {...props}
+                    addMovement={this.addMovement}
+                    movements={this.state.movements}
+                    handleMovementInput={(e,idx) => this.handleMovementInput(e,idx)}
+                    handleSubmit={this.handleSubmit}
+                    getType={(type) => this.getWodType(type)}
+                  />)}
               />
               <Route 
                 path="/addwod/:type(fortime)" 
                 render={ (props) => 
-                <ForTime {...props} 
-                  addMovement={this.addMovement}
-                  movements={this.state.movements}
-                  handleMovementInput={(e,idx) => this.handleMovementInput(e,idx)}
-                  handleSubmit={this.handleSubmit}
-                  getType={(type) => this.getWodType(type)}
-                  />} 
+                  (!user ?
+                  <Redirect to="/signin" />
+                    :
+                  <ForTime {...props} 
+                    addMovement={this.addMovement}
+                    movements={this.state.movements}
+                    handleMovementInput={(e,idx) => this.handleMovementInput(e,idx)}
+                    handleSubmit={this.handleSubmit}
+                    getType={(type) => this.getWodType(type)}
+                  />)} 
               />
             </Switch>
           </Router>
