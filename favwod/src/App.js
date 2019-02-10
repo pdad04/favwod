@@ -37,6 +37,15 @@ class App extends Component {
     }))
   }
 
+  removeMovement = (e) => {
+    e.preventDefault();
+    if(this.state.movements.length > 1){
+      this.setState((prevState) => ({
+        movements: prevState.movements.filter((el, index) => index !== prevState.movements.length-1)
+      }))
+    }
+  }
+
   handleMovementInput = (e, idx) =>{
     const currentValue = e.currentTarget.value;
 
@@ -61,7 +70,7 @@ class App extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.database.ref(`wods/${Date.now()}`).set({
+    this.database.ref(`${this.state.user}/wods/${Date.now()}`).set({
         movements: this.state.movements,
         time: this.state.time,
         type: this.state.type,
@@ -97,7 +106,7 @@ class App extends Component {
               <Route exact path="/" component={ Main } />
               <Route 
                 path="/savedwod" 
-                render={(props) => ( user ? <SavedWod /> : <Redirect to="/createaccount" />  )}
+                render={(props) => ( user ? <SavedWod firebase={this.database} user={this.state.user}/> : <Redirect to="/createaccount" />  )}
               />
               <Route
                 path="/createaccount"
@@ -127,6 +136,7 @@ class App extends Component {
                   :
                   <AMRAP {...props}
                     addMovement={this.addMovement}
+                    removeMovement={this.removeMovement}
                     movements={this.state.movements}
                     handleMovementInput={(e,idx) => this.handleMovementInput(e,idx)}
                     handleSubmit={this.handleSubmit}
@@ -141,6 +151,7 @@ class App extends Component {
                     :
                   <ForTime {...props} 
                     addMovement={this.addMovement}
+                    removeMovement={this.removeMovement}
                     movements={this.state.movements}
                     handleMovementInput={(e,idx) => this.handleMovementInput(e,idx)}
                     handleSubmit={this.handleSubmit}

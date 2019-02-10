@@ -21,6 +21,7 @@ class ForTime extends React.Component {
                         onInput={this.props.handleMovementInput}
                     />
                     <button onClick={this.props.addMovement}>Add Movement</button>
+                    <button onClick={this.props.removeMovement}>Remove Movement</button>
                     <button>Submit</button>
                 </form>
             </div>
