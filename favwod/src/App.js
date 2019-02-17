@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
+import {Preloader, Row, Col} from 'react-materialize';
 import './css/styles.css';
 import Header from './components/Header'
 import AMRAP from './components/AMRAP';
@@ -48,24 +49,32 @@ class App extends Component {
 
   handleMovementInput = (e, idx) =>{
     const currentValue = e.currentTarget.value;
+    const inputField = e.target.attributes.getNamedItem("name").value
 
-    if(e.currentTarget.type === 'number'){
-        this.setState({time: currentValue});
+    if(inputField === "time"){
+      this.setState({time: currentValue})
+    }else if(inputField === "rounds"){
+      this.setState({rounds: currentValue})
     }else{
       this.setState(prevState => {
-          prevState.movements.map((movement,index) => {
-              if(idx === index){
-                  return movement.name = currentValue;
-              }else{
-                  return movement;
-              }
-          });
+        prevState.movements.map((movement,index) => {
+          if(idx === index){
+            return movement.name = currentValue;
+          }else{
+            return movement;
+          }
+        });
       });
     }
   }
 
   getWodType = (type) =>{
-    this.setState({type: type})
+    const wodType = type;
+    // if(wodType ==="fortime"){
+    //   this.setState({type: "For Time"})
+    // }
+    
+    wodType === "fortime" ? this.setState({type: "For Time"}) : this.setState({type: "AMRAP"})
   }
 
   handleSubmit = (e) => {
@@ -73,6 +82,7 @@ class App extends Component {
     this.database.ref(`${this.state.user}/wods/${Date.now()}`).set({
         movements: this.state.movements,
         time: this.state.time,
+        rounds: this.state.rounds,
         type: this.state.type,
     });
   }
@@ -91,6 +101,14 @@ class App extends Component {
       return(
         <div className="App">
           <Header />
+          <Row className="valign-wrapper" style={{height:"100vh"}}>
+            <Col s={12} offset="s6">
+              <Preloader 
+                size="big"
+                color="red"
+              />
+            </Col>
+          </Row>
         </div>
       )
     }

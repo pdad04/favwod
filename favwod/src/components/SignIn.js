@@ -1,5 +1,6 @@
 import React from 'react';
 import firebase from '../base';
+import {Row, Col, Input, Button} from 'react-materialize';
 
 class SignIn extends React.Component {
 
@@ -32,12 +33,29 @@ class SignIn extends React.Component {
 
     render(){
         return (
-            <form className="full-width wod-inputs" onSubmit={this.signIn}>
-                <input type="text" className="movements" name="username" onChange={this.handleInput} placeholder="Enter Email address" required />
-                <input type="password" className="movements" name="password" onChange={this.handleInput} placeholder="password" required />
-                <button>Log In</button>
-                <p>Don't have an account <a href="/createAccount">Sign Up!</a></p>
-            </form>
+            <div>
+                <Row>
+                    <h1 className="center-align">Sign In</h1>
+                </Row>
+                <form onSubmit={this.signIn}>
+                    <Row>
+                        <Col s={12} offset="s1 l3">
+                            <Input s={10} l={6} type="text" label="Username" name="username" onChange={this.handleInput} required />
+                        </Col>
+                    </Row>  
+                    <Row> 
+                        <Col s={12} offset="s1 l3">
+                            <Input s={10} l={6} type="password" label="Password" name="password" onChange={this.handleInput} required />
+                        </Col>
+                    </Row>
+                    <Row>  
+                        <Col s={12} offset="s4 l5">
+                            <Button className="deep-orange accent-4">Sign In</Button>
+                            <p>No account? <a href="/createAccount" className="sign-up">Sign Up!</a></p>
+                        </Col>
+                    </Row>
+                </form>
+            </div>
         );
     }
 }

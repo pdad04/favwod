@@ -1,4 +1,5 @@
 import React from 'react';
+import {Row, Col, CardPanel,} from 'react-materialize';
 
 class SavedWod extends React.Component {
 
@@ -13,7 +14,6 @@ class SavedWod extends React.Component {
 
     getWods = async (wodsRef) =>{
         const wodsRefValue = await wodsRef.once('value');
-        // const wods = wodsRefValue.val();
         this.setState({wods: wodsRefValue.val()});
     }
 
@@ -26,18 +26,22 @@ class SavedWod extends React.Component {
         }else{
             return(
                 <React.Fragment>
+                    <Row>
                     {Object.keys(wods).map(key => 
-                        <div className="content" key={key}>
-                            <div className="wods">
-                                <h2>{wods[key].type}</h2>
-                                <ul>
-                                    {wods[key].movements.map((el,idx)=>
-                                        <li key={`${key}_${idx}`}>{el.name}</li>
-                                    )}
-                                </ul>
-                            </div>
-                        </div>
-                    )} 
+                            <Col s={12} l={4} key={key}>
+                                <CardPanel>
+                                        <h3 className="center-align">{wods[key].type}</h3>
+                                        <h5>Time: {wods[key].time ? `${wods[key].time} Mins` : "-"}</h5>
+                                        <h5>Rounds: {wods[key].rounds ? `${wods[key].rounds}` : "-"}</h5>
+                                        <ul className="flow-text browser-default">
+                                            {wods[key].movements.map((el,idx)=>
+                                                <li key={`${key}_${idx}`}>{el.name}</li>
+                                            )}
+                                        </ul>
+                                </CardPanel>
+                            </Col>
+                    )}
+                    </Row> 
                 </React.Fragment>
             )}
         }

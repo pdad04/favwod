@@ -1,18 +1,17 @@
 import React from 'react';
+import {Navbar, NavItem, Dropdown} from 'react-materialize';
 
 const Header = props => (
-    <header className="site-header">
-        <h1>Favorite WOD Tracker</h1>
-        <nav className="site-nav">
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/addwod/amrap">AMRAP</a></li>
-                <li><a href="/addwod/fortime">For Time</a></li>
-                {!props.user ? <li><a href="/signin">Sign In</a></li> : <li><a href="javascript:void(0);" onClick={props.signOut}>Sign Out</a></li>
-                }
-            </ul>
-        </nav>
-    </header>
+    <Navbar className="deep-orange accent-4" brand="Favwod" right>
+        <NavItem href="/">Home</NavItem>
+        <Dropdown trigger={<NavItem>Add Wod</NavItem>}>
+            <NavItem href="/addwod/amrap">AMRAP</NavItem>
+            <NavItem divider />
+            <NavItem href="/addwod/fortime">For Time</NavItem>
+        </Dropdown>
+        {props.user ? <NavItem href="/savedwod">My WODs</NavItem> : null}
+        {!props.user ? <NavItem href="/signin">Sign In</NavItem> : <NavItem onClick={props.signOut}>Sign Out</NavItem>}
+    </Navbar>
 )
 
 export default Header;

@@ -1,79 +1,69 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body{
+    background:#424242;
+    font-family: 'Roboto', sans-serif;
 }
 
-html {
-    background: rgba(0,0,0,0.5);
+h1,
+p{
+    color: #fff;
 }
 
-.App {
-    /* display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    grid-gap: 15px;
-    grid-template-areas: 
-        "header header"
-        "main main";
-    justify-items: center; */
+.sign-up{
+    color: #dd2c00;
 }
 
-.container{
-    width: 50%;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto;
-    grid-gap: 15px;
-    grid-template-areas: 
-        /* "header header" */
-        "main main";
-    justify-items: center;
-}
-.site-header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    grid-area: header;
-    text-align: center;
-    height: 20vh;
-    margin-bottom: 50px;
-    color: white;
-    border-bottom: 1px solid white;
+.movement-input label::before{
+    content:"* ";
+    color: #dd2c00;
+    font-weight: bold;
 }
 
-.content {
-    /* grid-area: main; */
-    /* text-align: center; */
+.page-header{
+    padding: 0 !important;
 }
 
-.site-nav ul {
-    margin-top: 1em;
-    text-align: center;
-}
-.site-nav li {
-    list-style: none;
-    display: inline;
-    padding: 5px;
+/* Color text inputs the same as overall site color theme */
+
+.input-field input[type=text]:focus + label, 
+.input-field input[type=number]:focus + label,
+.input-field input[type=password]:focus + label,
+.input-field input[type=email]:focus + label {
+    color: #dd2c00;
 }
 
-.wod-inputs .movements{
-    display: block;
-    margin-bottom: 20px;
-    width: 150px;
-    height: 30px;
+.input-field input[type=text]:focus,
+.input-field input[type=number]:focus,
+.input-field input[type=password]:focus,
+.input-field input[type=email]:focus {
+    border-bottom: 1px solid #dd2c00;
+    box-shadow: 0 1px 0 0 #dd2c00;
+    color: #fff;
+    font-size: 2em;
 }
 
-.wods {
-    display: inline-block;
-    height: 250px;
-    width: 250px;
-    margin: 20px;
-    border: 1px solid black;
-    padding: 25px;
+.input-field input[type=text],
+.input-field input[type=number],
+.input-field input[type=password],
+.input-field input[type=email] {
+    color: #fff;
+    font-size: 2em;
 }
 
-.full-width{
-    grid-column: 1 / -1;
+.dropdown-content {
+    background: #dd2c00;
+}
+
+.dropdown-content li>a {
+    color: #fff;
+}
+
+.dropdown-content li>a:hover{
+    color: #dd2c00;
+}
+
+.card-panel {
+    height: 32em;
+    overflow: scroll;
 }

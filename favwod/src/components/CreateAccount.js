@@ -1,5 +1,6 @@
 import React from 'react';
 import firebase from '../base';
+import {Input, Button, Row, Col} from 'react-materialize';
 
 class CreateAccount extends React.Component {
     state = {
@@ -8,10 +9,6 @@ class CreateAccount extends React.Component {
         confirmPassword: '',
         
     }
-
-    // componentDidMount(){
-    //     this.props.getUser()
-    // }
 
     handleCreate = (event) => {
         event.preventDefault();
@@ -44,18 +41,35 @@ class CreateAccount extends React.Component {
     
     render() {
         return(
-            <form className="full-width wod-inputs" onSubmit={this.handleCreate}>
-                <label htmlFor="username">Email</label>
-                <input type="email" className="movements" name="username" placeholder="Email Address" onChange={this.handleInput} required></input>
-
-                <label htmlFor="password">Password</label>
-                <input type="password" className="movements" name="password" placeholder="Password" onChange={this.handleInput} required />
-
-                <label htmlFor="confirm">Confirm Password</label>
-                <input type="password" className="movements" name="confirm" onChange={this.handleInput} required />
-
-                <button type="submit">Create Account</button>
-            </form>
+            <div>
+                <h1 className="center-align">Create Account</h1>
+                <form onSubmit={this.handleCreate}>
+                    <Row>
+                        <Col s={12} offset="s1 l3">
+                            <Input s={10} l={6}  type="email" label="Email" name="email" onChange={this.handleInput} required />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col s={12} offset="s1 l3">
+                            <Input s={10} l={6} type="password" label="Password" name="password" onChange={this.handleInput} required />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col s={12} offset="s1 l3">
+                            <Input s={10} l={6} type="password" label="Confirm" name="confirm" onChange={this.handleInput} required />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col s={12} offset="s3 l5">
+                            <Button 
+                                type="submit"
+                                className="deep-orange accent-4"
+                                >Create Account
+                            </Button>
+                        </Col>
+                    </Row> 
+                </form>
+            </div>
         )
     }
 }
