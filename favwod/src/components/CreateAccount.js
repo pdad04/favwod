@@ -7,21 +7,26 @@ class CreateAccount extends React.Component {
         email: '',
         password: '',
         confirmPassword: '',
-        
+        pwError: '',
     }
 
     handleCreate = (event) => {
         event.preventDefault();
         const {email, password, confirmPassword } = this.state;
-        
+
+        if(this.state.pwError){
+            this.setState({pwError: ""});
+        }
         if(password !== confirmPassword){
-            alert("Passwords must match");
+            this.setState({pwError: "Passwords must match"});
             return;
         }
 
         firebase.auth().createUserWithEmailAndPassword(email, password)
         .catch(error => {
-            console.log(error.code, error.message);
+            if(error.code === "auth/weak-password"){
+                this.setState({pwError: "Password must be at least 6 characters"})
+            }
         });
 
         this.props.getUser();
@@ -46,17 +51,43 @@ class CreateAccount extends React.Component {
                 <form onSubmit={this.handleCreate}>
                     <Row>
                         <Col s={12} offset="s1 l3">
-                            <Input s={10} l={6}  type="email" label="Email" name="email" onChange={this.handleInput} required />
+                            <Input 
+                                s={10} 
+                                l={6}  
+                                type="email" 
+                                label="Email" 
+                                name="email" 
+                                onChange={this.handleInput} 
+                                required 
+                            />
                         </Col>
                     </Row>
                     <Row>
                         <Col s={12} offset="s1 l3">
-                            <Input s={10} l={6} type="password" label="Password" name="password" onChange={this.handleInput} required />
+                            <Input 
+                                s={10} 
+                                l={6} 
+                                type="password" 
+                                label="Password (6 Characters)" 
+                                name="password" 
+                                onChange={this.handleInput}
+                                required 
+                            />
                         </Col>
                     </Row>
                     <Row>
                         <Col s={12} offset="s1 l3">
-                            <Input s={10} l={6} type="password" label="Confirm" name="confirm" onChange={this.handleInput} required />
+                            <Input 
+                                s={10} 
+                                l={6} 
+                                type="password" 
+                                label="Confirm" 
+                                name="confirm" 
+                                onChange={this.handleInput} 
+                                error={this.state.pwError}
+                                validate
+                                required 
+                            />
                         </Col>
                     </Row>
                     <Row>

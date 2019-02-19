@@ -48,17 +48,20 @@ class ForTime extends React.Component {
                                 style={{marginRight:"1em", marginBottom:"1em"}}
                                 className="deep-orange accent-4" 
                                 type="submit">
-                                Save<Icon left>save</Icon></Button>
+                                Save<Icon left>save</Icon>
+                            </Button>
                             <Button 
                                 style={{marginRight:"1em", marginBottom:"1em"}}
                                 className="deep-orange accent-4" 
                                 onClick={this.props.addMovement}>
-                                Add Movement<Icon left>add</Icon></Button>
+                                Add Movement<Icon left>add</Icon>
+                            </Button>
                             <Button
                                 style={{marginBottom:"1em"}}
                                 className="deep-orange accent-4" 
                                 onClick={this.props.removeMovement}>
-                                Remove Movement<Icon left>remove</Icon></Button>
+                                Remove Movement<Icon left>remove</Icon>
+                            </Button>
                         </Col>
                     </Row>
                 </form>

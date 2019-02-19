@@ -1,5 +1,5 @@
 import React from 'react';
-import {Row, Col, CardPanel,} from 'react-materialize';
+import {Row, Col, CardPanel} from 'react-materialize';
 
 class SavedWod extends React.Component {
 
@@ -19,9 +19,19 @@ class SavedWod extends React.Component {
 
     render(){
         const {wods} = this.state;
-        if(!wods){
+        if(wods === null){
             return(
-                <div></div>
+                <Row>
+                    <Col s={12}>
+                        <h2 className="center-align flow-text">You have no saved wods yet. Add a WOD to your list.</h2>
+                    </Col>
+                    <Col s={5} l={2}offset="s1 l4">
+                        <a href="/addwod/amrap" className="my-button">AMRAP</a>
+                    </Col>
+                    <Col s={5} l={2}>
+                    <a href="/addwod/fortime" className="my-button">For Time</a>
+                    </Col>
+                </Row>
             )
         }else{
             return(

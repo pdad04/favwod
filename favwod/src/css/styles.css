@@ -6,6 +6,7 @@ body{
 }
 
 h1,
+h2,
 p{
     color: #fff;
 }
@@ -14,14 +15,46 @@ p{
     color: #dd2c00;
 }
 
-.movement-input label::before{
+.input-field input[type=text] + label::before,
+.input-field input[type=email] + label::before,
+.input-field input[type=password] + label::before{
     content:"* ";
-    color: #dd2c00;
+    color:#dd2c00;
     font-weight: bold;
 }
 
+
 .page-header{
     padding: 0 !important;
+}
+
+.my-button{
+    display: inline-block;
+    background-color: #dd2c00;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    letter-spacing: .5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 2px;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 2rem;
+    text-transform: uppercase;
+    vertical-align: middle;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2)
+}
+
+.page-not-found{
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.header-not-found{
+    font-size: 25vw;
 }
 
 /* Color text inputs the same as overall site color theme */

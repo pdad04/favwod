@@ -10,6 +10,7 @@ import SavedWod from './components/SavedWod';
 import SignIn from './components/SignIn';
 import firebase from './base';
 import CreateAccount from './components/CreateAccount';
+import NoMatch from './components/NoMatch';
 
 class App extends Component {
 
@@ -70,15 +71,12 @@ class App extends Component {
 
   getWodType = (type) =>{
     const wodType = type;
-    // if(wodType ==="fortime"){
-    //   this.setState({type: "For Time"})
-    // }
     
     wodType === "fortime" ? this.setState({type: "For Time"}) : this.setState({type: "AMRAP"})
   }
+  
 
   handleSubmit = (e) => {
-    e.preventDefault();
     this.database.ref(`${this.state.user}/wods/${Date.now()}`).set({
         movements: this.state.movements,
         time: this.state.time,
@@ -124,7 +122,7 @@ class App extends Component {
               <Route exact path="/" component={ Main } />
               <Route 
                 path="/savedwod" 
-                render={(props) => ( user ? <SavedWod firebase={this.database} user={this.state.user}/> : <Redirect to="/createaccount" />  )}
+                render={(props) => ( user ? <SavedWod firebase={this.database} user={this.state.user}/> : <Redirect to="/signin" />  )}
               />
               <Route
                 path="/createaccount"
@@ -175,6 +173,9 @@ class App extends Component {
                     handleSubmit={this.handleSubmit}
                     getType={(type) => this.getWodType(type)}
                   />)} 
+              />
+              <Route 
+                component={NoMatch}
               />
             </Switch>
           </Router>
