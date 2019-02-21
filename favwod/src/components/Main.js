@@ -19,7 +19,7 @@ const Main = () => (
             <Col s={12} l={6}>
                 <Card className='medium flow-text'
                     header={<CardTitle image={savedwod}></CardTitle>}>
-                    A simple way to track WODs you want redo in the future.
+                    A simple way to track WODs you want to redo in the future.
                 </Card>
             </Col>
             <Col s={12} l={6}>
